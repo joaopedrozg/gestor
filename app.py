@@ -30,7 +30,6 @@ def index():
 @app.route("/pendencias")
 def lista_pendencias():
     pendencias=Pendencias.query.all()
-    print(pendencias)
     return render_template("pendencias.html", pendencias=Pendencias.query.all())
 
 @app.route("/nova_pendencia", methods=["POST","GET"])
