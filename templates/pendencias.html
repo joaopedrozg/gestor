@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<br>
+<h2 style="text-align: center;">Lista de Pendências</h2>
+<hr>
+<a href="{{url_for('nova_pendencia')}}" class="btn btn-secondary">Adicionar</a>
+<br>
+
+<table class="table">
+    <thead>
+      <tr style="text-align: center;">
+        <th scope="col">ID</th>
+        <th scope="col">NÚMERO</th>
+        <th scope="col">DESCRIÇÃO</th>
+        <th scope="col">DATA INCLUSÃO</th>
+        <th scope="col">DATA FINALIZAÇÂO</th>
+        <th scope="col">STATUS</th>
+        <th scope="col">AÇÕES</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+
+     
+      
+        {% for pendencia in pendencias %}
+        <tr class="{% if pendencia.status == 'Finalizada' %}table-success{% elif pendencia.status == 'Ativa' %}table-warning{% else %}table-danger{% endif %}" style="text-align: center;">
+        <td>{{ pendencia.id }}</td>
+        <td>{{ pendencia.numero }}</td>
+        <td>{{ pendencia.descricao}}</td>
+        <td>{{ pendencia.dataInclusao.strftime('%d/%m/%Y') }}</td>
+        <td>{% set exibir = "Não Finalizada" if pendencia.dataFinalizacao == None else pendencia.dataFinalizacao.strftime("%d/%m/%Y") %}
+          {{ exibir }}
+        </td>
+        <td>{{ pendencia.status }}</td>
+        <td style="text-align: end;">
+          <a href="{{pendencia.id}}/atualiza_pendencia"class="btn btn-secondary">Editar</a>
+          <a href="{{pendencia.id}}/remove_pendencia" onclick="return confirm('Deseja excluir está pendência?')" class="btn btn-danger">Excluir</a>
+        </td>
+        </tr>
+        {% endfor %}
+      
+
+
+{% endblock conteudo%}

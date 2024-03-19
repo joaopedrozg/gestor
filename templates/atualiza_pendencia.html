@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<br>
+<h2 style="text-align: center;">Atualizar Pendência</h2>
+<hr>
+
+<form action="{{url_for('atualiza_pendencia',id=pendencia.id )}}" method="POST" class="form-group">
+    <label for="" class="form-control"></label>
+    <input type="number" name="numero" placeholder="Digite o número " required class="form-control" value="{{pendencia.numero}}">
+    <label for="" class="form-control"></label>
+    <input type="text" name="descricao" placeholder="digite uma breve descricão" class="form-control" value="{{pendencia.descricao}}">
+    <label for="" class="form-control"></label>
+    <select name="status" class="form-control">
+        <option value="">{{pendencia.status}}</option>
+        <option value="Ativa">Ativa</option>
+        <option value="Em Processamento">Em processamento</option>
+        <option value="Finalizada">Finalizada</option>
+       
+    </select>
+    <br>
+    <button class="btn btn-success">Atualizar</button>
+
+
+
+</form>
+
+{% endblock conteudo%}
